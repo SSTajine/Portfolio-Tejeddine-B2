@@ -207,6 +207,11 @@ body {
     border-radius: 2px;
 }
 
+.sections .parcours ul li a:visited{
+    color:#7c3894;
+    border-radius: 2px;
+}
+
 .sections .mes-projets ul li {
     color:#7c3894;
     font-size: x-large;
