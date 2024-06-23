@@ -199,6 +199,8 @@ body {
 
 .sections .parcours ul li a {
     font-size: larger;
+    color:#b358d4;
+    border-radius: 2px;
 }
 
 .sections .parcours ul li a:hover{
