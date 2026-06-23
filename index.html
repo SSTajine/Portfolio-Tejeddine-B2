@@ -1,188 +1,560 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="styles-Tejeddine-B2.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
-    <script src="styles-Tejeddine-B2.js"></script>
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tejeddine Benhadada — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-    .highlight {
-      font-weight: bold;
-      font-size: larger;
-      color: #b358d4; /* Exemple de style personnalisé */
-    }
-  </style>
+  :root{
+    --ink:#1c1726;
+    --paper:#f4f1f9;
+    --paper-2:#eae6f3;
+    --rust:#6d3bb0;
+    --rust-soft:#9168ce;
+    --moss:#4a3a6b;
+    --line:#d8cfe8;
+    --muted:#6f6685;
+    --display:"Fraunces",Georgia,serif;
+    --body:"Inter",system-ui,sans-serif;
+    --mono:"JetBrains Mono",monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:var(--rust);color:var(--paper)}
+
+  a{color:inherit;text-decoration:none}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,241,249,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .nav-mark{
+    font-family:var(--mono);
+    font-size:13px;letter-spacing:.04em;
+    color:var(--ink);
+    display:flex;align-items:center;gap:9px;
+  }
+  .nav-mark b{font-weight:500}
+  .nav-dot{width:7px;height:7px;border-radius:50%;background:var(--rust)}
+  .nav-links{display:flex;gap:30px}
+  .nav-links a{
+    font-size:14px;color:var(--muted);
+    position:relative;transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:-4px;
+    width:0;height:1px;background:var(--rust);transition:width .25s;
+  }
+  .nav-links a:hover::after{width:100%}
+  @media(max-width:680px){.nav-links{display:none}}
+
+  /* ---------- HERO ---------- */
+  header{
+    padding:96px 0 80px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--rust);margin-bottom:26px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{content:"";width:30px;height:1px;background:var(--rust)}
+
+  h1{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(48px,9vw,108px);
+    line-height:.98;
+    letter-spacing:-.02em;
+    margin-bottom:30px;
+  }
+  h1 em{font-style:italic;color:var(--rust)}
+
+  .lede{
+    max-width:560px;font-size:19px;color:#332b40;line-height:1.7;
+  }
+  .lede strong{font-weight:600;color:var(--ink)}
+
+  .hero-meta{
+    margin-top:46px;display:flex;flex-wrap:wrap;gap:14px 40px;
+    font-family:var(--mono);font-size:13px;color:var(--muted);
+  }
+  .hero-meta span{display:flex;align-items:center;gap:9px}
+  .hero-meta i{
+    font-style:normal;width:6px;height:6px;border-radius:50%;
+    background:var(--moss);
+  }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:84px 0;border-bottom:1px solid var(--line);scroll-margin-top:64px}
+  .sec-head{
+    display:flex;align-items:baseline;gap:18px;margin-bottom:48px;
+  }
+  .sec-num{
+    font-family:var(--mono);font-size:13px;color:var(--rust);
+    padding-top:6px;
+  }
+  .sec-title{
+    font-family:var(--display);font-weight:400;
+    font-size:clamp(28px,4.5vw,42px);letter-spacing:-.01em;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:36px}}
+  .about-grid p{font-size:18px;color:#2e2740;margin-bottom:20px}
+  .sidecard{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    padding:28px;
+    align-self:start;
+  }
+  .sidecard h4{
+    font-family:var(--mono);font-size:12px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);font-weight:500;
+    margin-bottom:16px;
+  }
+  .sidecard ul{list-style:none}
+  .sidecard li{
+    display:flex;justify-content:space-between;gap:12px;
+    padding:9px 0;border-top:1px dashed var(--line);
+    font-size:14.5px;
+  }
+  .sidecard li:first-child{border-top:none}
+  .sidecard li span:last-child{color:var(--muted);font-family:var(--mono);font-size:12.5px}
+
+  /* ---------- PARCOURS ---------- */
+  .timeline{position:relative;padding-left:30px}
+  .timeline::before{
+    content:"";position:absolute;left:6px;top:6px;bottom:6px;
+    width:1px;background:var(--line);
+  }
+  .tl-item{position:relative;padding:0 0 34px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;left:-30px;top:6px;
+    width:13px;height:13px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--rust);
+  }
+  .tl-item.soft::before{border-color:var(--moss)}
+  .tl-item.current::before{background:var(--rust);border-color:var(--rust);box-shadow:0 0 0 4px rgba(109,59,176,.15)}
+  .tl-place{font-family:var(--display);font-size:21px;margin-bottom:3px}
+  .tl-detail{color:var(--muted);font-size:15px}
+  .tl-detail a{color:var(--rust);border-bottom:1px solid transparent;transition:border .2s}
+  .tl-detail a:hover{border-color:var(--rust)}
+
+  /* ---------- SKILLS ---------- */
+  .skills-intro{max-width:620px;color:#2e2740;margin-bottom:40px;font-size:18px}
+  .chip-group{margin-bottom:30px}
+  .chip-group h4{
+    font-family:var(--mono);font-size:12px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:500;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    font-family:var(--mono);font-size:13px;
+    padding:7px 14px;border:1px solid var(--line);
+    background:var(--paper-2);
+    transition:transform .15s,border-color .2s,color .2s;
+    cursor:default;
+  }
+  .chip:hover{transform:translateY(-2px);border-color:var(--rust);color:var(--rust)}
+
+  /* ---------- PROJECTS ---------- */
+  .proj{
+    display:grid;grid-template-columns:auto 1fr;gap:40px;
+    padding:38px 0;border-top:1px solid var(--line);
+    transition:background .25s;
+  }
+  .proj:first-of-type{border-top:none}
+  .proj-index{
+    font-family:var(--mono);font-size:13px;color:var(--rust);padding-top:9px;
+  }
+  .proj-body h3{
+    font-family:var(--display);font-weight:500;
+    font-size:25px;line-height:1.2;margin-bottom:8px;
+  }
+  .proj-tags{
+    display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 16px;
+  }
+  .proj-tags span{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
+    color:var(--moss);background:rgba(74,58,107,.10);
+    padding:4px 10px;border-radius:2px;
+  }
+  .proj-year{
+    display:inline-block;font-family:var(--mono);font-size:11.5px;
+    color:var(--muted);margin-bottom:10px;
+    border:1px solid var(--line);padding:3px 9px;
+  }
+  .proj-body p{color:#332b40;font-size:16px;line-height:1.66}
+  .proj-feature{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-left:3px solid var(--rust);
+  }
+  .proj-feature .proj-index{color:var(--rust)}
+  .proj-feature .proj-body{padding:6px 26px 6px 0}
+  .proj-feature .proj-index{padding-left:26px}
+  @media(max-width:680px){
+    .proj{grid-template-columns:1fr;gap:10px}
+    .proj-feature .proj-body{padding:0 20px 20px}
+    .proj-feature .proj-index{padding:18px 0 0 20px}
+  }
+
+  /* ---------- CONTACT ---------- */
+  #me-contacter{border-bottom:none}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  @media(max-width:760px){.contact-grid{grid-template-columns:1fr;gap:36px}}
+  .contact-lead{font-family:var(--display);font-size:clamp(26px,4vw,38px);line-height:1.25;margin-bottom:20px}
+  .contact-mail{
+    font-family:var(--mono);font-size:15px;color:var(--rust);
+    border-bottom:1px solid var(--rust);display:inline-block;padding-bottom:2px;
+    transition:opacity .2s;
+  }
+  .contact-mail:hover{opacity:.7}
+  form label{
+    display:block;font-family:var(--mono);font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    margin-bottom:7px;
+  }
+  .field{margin-bottom:20px}
+  input,textarea{
+    width:100%;background:var(--paper-2);
+    border:1px solid var(--line);
+    padding:12px 14px;font-family:var(--body);font-size:15px;color:var(--ink);
+    transition:border-color .2s;resize:vertical;
+  }
+  input:focus,textarea:focus{outline:none;border-color:var(--rust)}
+  button{
+    font-family:var(--mono);font-size:13.5px;letter-spacing:.05em;
+    background:var(--ink);color:var(--paper);
+    padding:13px 26px;border:none;cursor:pointer;
+    transition:background .2s;
+  }
+  button:hover{background:var(--rust)}
+
+  footer{padding:40px 0;text-align:center}
+  footer p{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
 <body>
-    <div class="container" id="container">
-        <div class="sidebar" id="sidebar">
-            <div class="arrow-container">
-                <div class="arrow-icon" id="arrow-icon">>></div> <!-- Ajout de l'icône de flèche -->
-            </div>
-            <ul>
-                <li><a href="#ma-personne">Personne</a></li>
-                <li><a href="#parcours">Parcours</a></li>
-                <li><a href="#competences">Compétences</a></li>
-                <li><a href="#mes-projets">Mes Projets</a></li>
-                <div class="div-lien-contacter">
-                    <li class="lien-contacter"><a id="contact" href="#me-contacter">Me Contacter</a></li>
-                </div>
-            </ul>
-        </div>
-        <div class="main-content">
-            <div class="main-content-inside">
-                <h1>Tejeddine Benhadada</h1>
-                <h3>Mon Portfolio</h3>
-            </div>
-        </div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="nav-mark"><span class="nav-dot"></span><b>Tejeddine Benhadada</b></a>
+    <div class="nav-links">
+      <a href="#ma-personne">Profil</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#competences">Compétences</a>
+      <a href="#mes-projets">Projets</a>
+      <a href="#me-contacter">Contact</a>
     </div>
-    <div style="width: 100%; height: 10px; background-color: #542764;"></div>
-    <div class="sections">
-        <section id="ma-personne">
-            <h2>Qui je suis ? :</h2>
-            <div style="width: 100%; height: 2px; background-color: #542764;"></div>
-            <p>Intéressé par le développement en tout genre et les technologies innovantes, je ne suis aujourd'hui qu'un étudiant
-                 en 2ème année de <span class="highlight">BUT Informatique</span>. Cherchant à m'améliorer et à étendre mes domaines d'expertises dans cette filière,
-                 je peux vous <span class="highlight">garantir</span> que lors de ma prochaine année d'études, j'amasserai l'expérience nécessaire pour me 
-                 démarquer dans le monde du travail.<br><span class="highlight"> À ce moment là, ce portfolio vous le prouvera.</span>
-                </p>
-        </section>
-        <div style="width: 100%; height: 10px; border-radius: 30px; background-color: #542764;"></div>
-        <section class="parcours" id="parcours">
-            <h2>Mes Études :</h2>
-            <div style="width: 100%; height: 2px; background-color: #542764;"></div>
-            <p>Pour l'instant, ce n'est qu'un parcours simple, mais je compte bien <span class="highlight">enrichir</span> cette rubrique avec le temps :</p>
-            <ul id="list-disc">
-                <li><a href="https://college-champollion-grenoble.web.ac-grenoble.fr/" target="_blank">- Collège Champollion</a> : <span class="highlight">Brevet</span> mention Très Bien</li>
-                <li><a href="https://lycee-champollion.fr/" target="_blank">- Lycée Champollion</a> : <span class="highlight">BAC</span> mention Bien</li>
-                <li><a href="https://iut2.univ-grenoble-alpes.fr/iut2/accueil-iut2-998644.kjsp" target="_blank">- IUT2 Grenoble</a> : Actuellement en <span class="highlight">2ème année</span></li>
-                <div style="width: 100%; height: 2px; background-color: #542764;"></div>
-                <li style="margin-top: 10px;"><a href="https://www.norauto.fr/" target="_blank">- Norauto</a> : <span class="highlight">Stage</span> d'une semaine en magasin</li>
-                <li style="margin-top: 10px;"><a href="https://www.sdis38.fr/" target="_blank">- SDIS Isère</a> : <span class="highlight">Stage</span> de deux mois au sein du service applicatif</li>
-            </ul>
-        </section>
-        <div style="width: 100%; height: 10px; border-radius: 30px; background-color: #542764;"></div>
-        <section id="competences">
-            <h2>Mes Compétences :</h2>
-            <div style="width: 100%; height: 2px; background-color: #542764;"></div>
-            <p>Au travers de ces deux années en BUT, j'ai pu participer à de <span class="highlight">nombreux projets</span>, en groupe ou non,
-                 qui m'ont permis de mieux cerner mes lacunes tout comme mes <span class="highlight">forces</span>. Cela me permet donc d'affirmer
-                  que j'ai pu comprendre de quelle manière je pouvais faire <span class="highlight">gagner du temps efficacement</span> aux groupes
-                   auxquels j'ai pu faire parti.</p>
-            <p>Sans oublier bien sûr le niveau que j'ai pu acquérir dans de multiples langages informatiques, étant le 
-                <span class="highlight">Java(+JavaFx)</span>, <span class="highlight">l'HTML</span>, 
-                <span class="highlight">le CSS</span>, <span class="highlight">le SQL</span>, <span class="highlight">l'Assembleur</span>
-                 en plus du <span class="highlight">Shell</span>. 
-                Lors de ma seconde année, j'ai aussi pu ajouter du <span class="highlight">C</span>, du <span class="highlight">C+</span>+, du <span class="highlight">Symfony</span>
-                , du <span class="highlight">PHP</span>, du <span class="highlight">javascript</span> et du <span class="highlight">React</span> accompagné 
-                de <span class="highlight">Tailwind CSS</span> et <span class="highlight">Typescript</span></p>
-        </section>
-        <div style="width: 100%; height: 10px; border-radius: 30px; background-color: #542764;"></div>
-        <section class="mes-projets" id="mes-projets">
-            <h2>Mes Projets :</h2>
-            <div style="width: 100%; height: 2px; background-color: #542764;"></div>
-            <ul id="list-disc">
-                <li>- Implémentation d'un besoin client / Comparaison d'approches algorithmiques (1ère année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Lors de ce travail par groupe de 2, nous avons dû coder un programme répondant à un besoin client précis tout en
-                     fesant attention au coût du code en question. Ce dernier ne devait pas prendre plus de temps que demandé.</p>
-                <li>- Installation d'un poste pour le développement (1ère année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Ce projet individuel avait pour but de nous faire installer, sur une machine virtuelle, un système d'exploitation
-                    (ici Debian 11) accompagné d'un JDK, d'un git et d'IntelliJ IDEA Community(celui-ci de 3 manières différentes). 
-                    Puis de faire une carte mentale expliquant ces différents procédés.</p>
-                <li>- Création d'une base de données (1ère année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Ici, par groupe de 2, nous devions modéliser, puis implémenter une base de données qu'on a dû peupler à partir de données mises à notre
-                     disposition. Et l'interrogation de cette base par des requêtes SQL nous a permis d'obtenir des réponses par rapport
-                      aux facteurs ayant influencés la survie d'un passager du Titanic.</p>
-                <li>- Recueil de besoins / Découverte de l'environnement économique et écologique (1ère année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Lors de ce travail de groupe, nous devions faire une maquette de site internet, suivi du site lui-même, 
-                    dans le but de répondre à un besoin client présenté au préalable. Par groupe de 4, nous avions dû se répartir
-                     les tâches de manière efficace en plus de rendre chacun trois grilles personnels, en rapport avec notre
-                      implication dans le groupe et notre stratégie de travail en groupe.</p>
-                <li>- Installation de services réseau (1ère année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Ici, nous devions rendre un guide, fait individuellement, décrivant l'installation sur une machine virtuelle
-                     de Debian 12 sans interface graphique et sans serveur X, accompagnés de moyen simple pour créer un serveur
-                      local, c'est-à-dire, Apache, PostgreSQL et PHP. Ce guide d'installation devait être fait en anglais et être
-                       enrichie par des cpatures d'écrans que nous avions prises losrque l'on a nous même procédé à ces installations.</p>
-                <li>- Exploitation d'une base de données (1ère année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Ce projet en binôme avait pour but de, à partir d'une base de données disponible en opendata et renseignée par des contributions libres 
-                    (donc mal remplie, et contenant plus d'informations que nécessaire etc.), nous faire réaliser une étude simple contenant
-                     des graphiques appropriés pour répondre à une question précise(que nous devions créer nous-même), et rédigée en anglais. La base de données utilisée était
-                      celle proposée par https://fr.openfoodfacts.org/.</p>
-                <li>- Méga Projet (1ère année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Dans ce projet composé lui-même de 4 plus petits projets, nous devions incarner une équipe de développement en
-                     charge de créer une petite application pour une entreprise dont la fonction principale est de gérer des événements
-                      aux choix. Il nous était donc requis de rendre un dossier de conception(composé de diagramme de séquences et de
-                       classes), un document de conception des interfaces(composé de personas, maquettes, critères ergonomiques
-                        sélectionnés et leur mise en oeuvre), un document d'analyse de gestion de tâches(composé d'un graphe MPM),
-                         un document de méthodes nulériques(composé d'optimisation multi-critères) en plus d'un bilan de gestion de
-                          projet(résumant la participation de chacun des élèves du groupe ainsi que l'analyse des risques et des
-                           contraintes). Tout cela a été fait par groupe de 5 ou 6 sur l'espace d'un mois et demi.</p>
-                <li>- Méga Projet, promouvoir le patrimoine français (2ème année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Dans le cadre d’un projet de groupe (6 à 7 personnes) durant ma deuxième année de BUT Informatique, 
-                    nous avons conçu une application web visant à promouvoir le patrimoine artistique français, et plus
-                     particulièrement les musées et les tableaux qu’ils exposent. L’objectif était de proposer une expérience
-                      interactive et personnalisée aux utilisateurs, en leur suggérant des musées susceptibles de leur plaire
-                       en fonction de leurs goûts artistiques. Les fonctionnalités principales se résumaient en: Présentation d’une sélection de 
-                       tableaux avec un système d’interaction permettant d’exprimer ses préférences, analyse des préférences de l’utilisateur pour
-                        recommander un musée à proximité correspondant à ses goûts, une interface moderne et responsive adaptée à différents supports. Pour ce faire,
-                         nous avons utilisé, en front-end, du React, du TypeScript et du Tailwind CSS. Personnellement, j’ai travaillé exclusivement sur le développement 
-                         de l’interface utilisateur. J’ai conçu et intégré les différentes vues avec React et Tailwind CSS, en veillant à proposer une navigation fluide, 
-                         intuitive et agréable visuellement. J’ai également collaboré avec l’équipe sur la mise en place des composants interactifs liés à la sélection des 
-                         tableaux et à l’affichage des recommandations muséales.</p>
-                <li>- Modifier et améliorer une application mobile défaillante (2ème année):</li>
-                <div style="width: auto; height: 1px; background-color: #542764;"></div>
-                <p>Ce projet a été mené en groupe de 5 à 6 personnes. 
-                    Il s’agissait d’améliorer une application mobile déjà existante 
-                    permettant aux étudiants de gérer leurs candidatures de stage, 
-                    ainsi que l’application web associée destinée aux administrateurs. 
-                    Notre travail était guidé par une sélection de 4 sous-critères de qualité 
-                    issus de la norme ISO 25000, que nous avons choisis parmi 21 propositions, 
-                    afin de structurer nos priorités d’amélioration. Les fonctionnalités retravaillées se résument en : une amélioration de l’ergonomie et de 
-                    l’accessibilité de l’application mobile, une meilleure visualisation de l’état des candidatures
-                    et une refonte de certaines interfaces pour une navigation plus fluide et cohérente avec les critères qualité retenus.
-                    Les technologies utilisées sont l'Android Studio (Java/Kotlin) pour l'application mobile et le Symfony (PHP) pour l'application web administrateur
-                    Personnellement, j’ai participé exclusivement au développement de la partie front-end de l’application mobile. Mon travail a principalement consisté
-                    à repenser l’interface utilisateur en accord avec les critères qualité sélectionnés, et à implémenter des écrans plus intuitifs et accessibles.
-                    J’ai veillé à respecter une logique de design cohérente tout au long de l’application, tout en assurant une bonne compatibilité avec différents formats d’écran.</p>
-                
-            </ul>
-        </section>
-        <div style="width: 100%; height: 10px; border-radius: 30px; background-color: #542764;"></div>
-        <section id="me-contacter">
-            <h2>Me Contacter :</h2>(ou directement avec tejeddinebenhadada@gmail.com jusqu'à ce que cette section soit fonctionnelle)
-            <div style="width: 100%; height: 2px; background-color: #542764;"></div>
-            <form id="contact-form">
-                <div class="form-group" action="https://formspree.io/f/xjkrydkv" method="POST">
-                  <label for="email">Votre adresse e-mail :</label>
-                  <input type="email" id="email" name="email" required>
-                  <span class="error-message" id="email-error"></span>
-                </div>
-                <div class="form-group">
-                  <label for="subject">Titre du mail :</label>
-                  <input type="text" id="subject" name="subject" required>
-                </div>
-                <div class="form-group">
-                  <label for="message">Votre message :</label>
-                  <textarea id="message" name="message" rows="6" required></textarea>
-                </div>
-                <button type="submit">Envoyer</button>
-              </form>
-        </section>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="eyebrow reveal">Portfolio · Développement</div>
+    <h1 class="reveal">Tejeddine<br><em>Benhadada</em></h1>
+    <p class="lede reveal">Étudiant en <strong>BUT Informatique</strong> à l'IUT2 Grenoble, en alternance au sein du service applicatif du <strong>SDIS de l'Isère</strong>. Je construis des interfaces claires et des traitements de données fiables, avec le goût du travail bien documenté.</p>
+    <div class="hero-meta reveal">
+      <span><i></i>Grenoble, France</span>
+      <span><i></i>Front-end &amp; données</span>
+      <span><i></i>Disponible pour échanger</span>
     </div>
-    <footer>
-        <p>&copy; 2025 Tejeddine Benhadada. Tous droits réservés.</p>
-    </footer>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="ma-personne">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">Qui je suis</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>Intéressé par le développement sous toutes ses formes et par les technologies qui font évoluer un métier, j'avance dans le BUT Informatique avec une idée simple en tête, apprendre vite et rendre un travail propre.</p>
+        <p>Mon alternance au SDIS de l'Isère m'a confronté à des projets réels, où la fiabilité des données pèse directement sur le terrain. J'y ai gagné en autonomie, en rigueur et en sens de l'organisation, autant que sur le plan purement technique.</p>
+        <p>Chaque projet auquel j'ai participé, seul ou en équipe, m'a aidé à mieux cerner mes forces comme mes lacunes, et à comprendre comment faire gagner du temps à un groupe sans rogner sur la qualité.</p>
+      </div>
+      <aside class="sidecard reveal">
+        <h4>En bref</h4>
+        <ul>
+          <li><span>Statut</span><span>Alternant BUT3</span></li>
+          <li><span>Établissement</span><span>IUT2 Grenoble</span></li>
+          <li><span>Entreprise</span><span>SDIS 38</span></li>
+          <li><span>Focus</span><span>Front-end / ETL</span></li>
+          <li><span>Langues</span><span>FR · EN</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Parcours</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item soft current reveal">
+        <div class="tl-place">SDIS de l'Isère</div>
+        <div class="tl-detail">Alternance puis stage au service applicatif · <a href="https://www.sdis38.fr/" target="_blank" rel="noopener">sdis38.fr</a></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-place">IUT2 Grenoble</div>
+        <div class="tl-detail">BUT Informatique, actuellement en troisième année · <a href="https://iut2.univ-grenoble-alpes.fr/iut2/accueil-iut2-998644.kjsp" target="_blank" rel="noopener">iut2.univ-grenoble-alpes.fr</a></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-place">Lycée Champollion</div>
+        <div class="tl-detail">Baccalauréat, mention Bien · <a href="https://lycee-champollion.fr/" target="_blank" rel="noopener">lycee-champollion.fr</a></div>
+      </div>
+      <div class="tl-item soft reveal">
+        <div class="tl-place">Norauto</div>
+        <div class="tl-detail">Stage d'observation d'une semaine en magasin · <a href="https://www.norauto.fr/" target="_blank" rel="noopener">norauto.fr</a></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-place">Collège Champollion</div>
+        <div class="tl-detail">Brevet, mention Très Bien · <a href="https://college-champollion-grenoble.web.ac-grenoble.fr/" target="_blank" rel="noopener">college-champollion-grenoble</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Compétences</h2>
+    </div>
+    <p class="skills-intro reveal">Deux années de BUT et une alternance m'ont permis de toucher à des langages et des outils variés, du front-end à la manipulation de bases de données, en passant par la gestion de versions et l'automatisation de traitements.</p>
+
+    <div class="chip-group reveal">
+      <h4>Front-end</h4>
+      <div class="chips">
+        <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Tailwind CSS</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span>
+      </div>
+    </div>
+    <div class="chip-group reveal">
+      <h4>Back-end &amp; langages</h4>
+      <div class="chips">
+        <span class="chip">Java</span><span class="chip">JavaFX</span><span class="chip">PHP</span><span class="chip">Symfony</span><span class="chip">C</span><span class="chip">C++</span><span class="chip">Assembleur</span><span class="chip">Shell</span>
+      </div>
+    </div>
+    <div class="chip-group reveal">
+      <h4>Données &amp; outils</h4>
+      <div class="chips">
+        <span class="chip">SQL</span><span class="chip">Apache Hop</span><span class="chip">Talend</span><span class="chip">Jenkins</span><span class="chip">SVN</span><span class="chip">Android Studio</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="mes-projets">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Projets</h2>
+    </div>
+
+    <!-- FEATURED: alternance -->
+    <article class="proj proj-feature reveal">
+      <div class="proj-index">★</div>
+      <div class="proj-body">
+        <span class="proj-year">Alternance · BUT3</span>
+        <h3>Migration de flux ETL de Talend vers Apache Hop</h3>
+        <div class="proj-tags"><span>Apache Hop</span><span>Talend</span><span>Jenkins</span><span>SVN</span><span>SQL</span></div>
+        <p>Au SDIS de l'Isère, j'ai conduit en grande autonomie le remplacement de l'outil propriétaire Talend par la solution libre Apache Hop pour les échanges de données entre applications métier. Le projet couvrait la prise en main de l'outil, une preuve de faisabilité, la mise en place des machines et de l'exécution automatisée des flux, puis la migration par lots. Douze flux ont été migrés, testés et mis en service, et l'ensemble a donné lieu à une documentation complète pensée pour que l'équipe reprenne le travail.</p>
+      </div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-index">08</div>
+      <div class="proj-body">
+        <span class="proj-year">2ᵉ année</span>
+        <h3>Méga Projet, promouvoir le patrimoine français</h3>
+        <div class="proj-tags"><span>React</span><span>TypeScript</span><span>Tailwind CSS</span></div>
+        <p>En groupe de six à sept personnes, nous avons conçu une application web mettant en avant le patrimoine artistique français, en particulier les musées et leurs collections. L'idée était d'offrir une expérience interactive qui recommande un musée proche selon les goûts de l'utilisateur, à partir d'une sélection de tableaux à apprécier. Je me suis concentré sur le développement de l'interface, en construisant des vues fluides et lisibles avec React et Tailwind CSS et en intégrant les composants liés à la sélection des œuvres et à l'affichage des recommandations.</p>
+      </div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-index">07</div>
+      <div class="proj-body">
+        <span class="proj-year">2ᵉ année</span>
+        <h3>Améliorer une application mobile défaillante</h3>
+        <div class="proj-tags"><span>Android Studio</span><span>Java / Kotlin</span><span>Symfony</span></div>
+        <p>Mené en groupe de cinq à six, ce projet visait à améliorer une application mobile existante de gestion des candidatures de stage ainsi que son interface web d'administration. Nous avons cadré nos priorités autour de quatre sous-critères de qualité issus de la norme ISO 25000, choisis parmi vingt et une propositions. De mon côté, j'ai travaillé sur le front-end mobile, en repensant l'interface pour la rendre plus intuitive et accessible tout en gardant une logique de design cohérente sur l'ensemble des écrans.</p>
+      </div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-index">06</div>
+      <div class="proj-body">
+        <span class="proj-year">1ʳᵉ année</span>
+        <h3>Méga Projet, application de gestion d'événements</h3>
+        <div class="proj-tags"><span>Conception</span><span>UML</span><span>Gestion de projet</span></div>
+        <p>Sur un mois et demi et en groupe de cinq à six, nous avons incarné une équipe de développement chargée de créer une petite application de gestion d'événements. Le projet réunissait quatre volets, un dossier de conception avec diagrammes de séquences et de classes, un document d'interfaces avec personas, maquettes et critères ergonomiques, une analyse de gestion des tâches appuyée sur un graphe MPM, et un bilan de projet couvrant la participation de chacun ainsi que l'analyse des risques et des contraintes.</p>
+      </div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-index">05</div>
+      <div class="proj-body">
+        <span class="proj-year">1ʳᵉ année</span>
+        <h3>Exploitation d'une base de données en opendata</h3>
+        <div class="proj-tags"><span>SQL</span><span>Data viz</span><span>Anglais</span></div>
+        <p>En binôme, nous sommes partis d'une base de données issue d'Open Food Facts, renseignée par des contributions libres et donc imparfaite et surchargée d'informations. À partir de cette matière brute, nous avons mené une étude répondant à une question que nous avions nous-mêmes formulée, appuyée sur des graphiques adaptés et rédigée en anglais.</p>
+      </div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-index">04</div>
+      <div class="proj-body">
+        <span class="proj-year">1ʳᵉ année</span>
+        <h3>Installation de services réseau</h3>
+        <div class="proj-tags"><span>Debian</span><span>Apache</span><span>PostgreSQL</span><span>PHP</span></div>
+        <p>Réalisé individuellement, ce projet consistait à rédiger un guide d'installation, en anglais, décrivant la mise en place d'un Debian 12 sans interface graphique et sans serveur X, accompagné d'un serveur local reposant sur Apache, PostgreSQL et PHP. Le guide était enrichi de captures d'écran prises au fil de mes propres installations.</p>
+      </div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-index">03</div>
+      <div class="proj-body">
+        <span class="proj-year">1ʳᵉ année</span>
+        <h3>Recueil de besoins et environnement économique</h3>
+        <div class="proj-tags"><span>Maquettage</span><span>Web</span><span>Travail d'équipe</span></div>
+        <p>En groupe de quatre, nous devions produire une maquette de site puis le site lui-même pour répondre à un besoin client présenté en amont. Au delà du développement, le projet portait sur la répartition efficace des tâches, chacun rendant trois grilles personnelles décrivant son implication et sa stratégie de travail en groupe.</p>
+      </div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-index">02</div>
+      <div class="proj-body">
+        <span class="proj-year">1ʳᵉ année</span>
+        <h3>Création d'une base de données</h3>
+        <div class="proj-tags"><span>Modélisation</span><span>SQL</span></div>
+        <p>En binôme, nous avons modélisé puis implémenté une base de données que nous avons peuplée à partir de données fournies. L'interrogation par requêtes SQL nous a permis d'explorer les facteurs ayant influencé la survie des passagers du Titanic.</p>
+      </div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-index">01</div>
+      <div class="proj-body">
+        <span class="proj-year">1ʳᵉ année</span>
+        <h3>Comparaison d'approches algorithmiques</h3>
+        <div class="proj-tags"><span>Algorithmique</span><span>Optimisation</span></div>
+        <p>En binôme, nous avons développé un programme répondant à un besoin client précis, avec une contrainte forte sur le coût du code. La solution devait rester dans les limites de temps demandées, ce qui nous a poussés à comparer plusieurs approches algorithmiques.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="me-contacter">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">Me contacter</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="contact-lead">Une question, un projet ou simplement l'envie d'échanger ?</p>
+        <p style="color:#332b40;margin-bottom:22px">Le formulaire n'est pas encore relié à un service d'envoi. En attendant, écrivez-moi directement, je réponds volontiers.</p>
+        <a class="contact-mail" href="mailto:tejeddinebenhadada@gmail.com">tejeddinebenhadada@gmail.com</a>
+      </div>
+      <form class="reveal" onsubmit="return false">
+        <div class="field">
+          <label for="email">Votre adresse e-mail</label>
+          <input id="email" type="email" placeholder="prenom@exemple.com" />
+        </div>
+        <div class="field">
+          <label for="subject">Titre du mail</label>
+          <input id="subject" type="text" placeholder="Sujet" />
+        </div>
+        <div class="field">
+          <label for="message">Votre message</label>
+          <textarea id="message" rows="4" placeholder="Écrivez votre message"></textarea>
+        </div>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2025 Tejeddine Benhadada · Tous droits réservés</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+    });
+  },{threshold:.12,rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay=(Math.min(i%6,5)*40)+'ms';
+    io.observe(el);
+  });
+
+  // Smooth scroll for in-page anchor links
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('a[href^="#"]').forEach(link=>{
+    link.addEventListener('click', e=>{
+      const id = link.getAttribute('href').slice(1);
+      const target = id ? document.getElementById(id) : document.body;
+      if(!target) return;
+      e.preventDefault();
+      const navH = document.querySelector('nav')?.offsetHeight || 0;
+      const y = target.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+      history.replaceState(null, '', '#' + id);
+    });
+  });
+</script>
 </body>
 </html>
